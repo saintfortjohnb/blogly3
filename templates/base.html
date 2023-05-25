@@ -1,0 +1,24 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blogly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <!-- Include navigation elements here -->
+        <a href="/">Home</a> | <a href="/users">Users</a> | <a href="/users/new">New User!</a> | <a href="/tags">Tags!</a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <br>
+        <p>© 2023 Blogly Inc.</p>
+    </footer>
+</body>
+</html>

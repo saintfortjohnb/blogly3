@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <br>
+    <p class="right-align">By: {{ user.first_name }} {{ user.last_name }}</p>
+    <p class="right-align">Created at: {{ post.created_at }}</p>
+
+    {% if post.tags %}
+        <p class="right-align">Tags:
+            {% for tag in post.tags %}
+                <a href="/tags/{{ tag.id }}" class="view-link">{{ tag.name }}</a>
+                {% if not loop.last %}&nbsp;{% endif %}
+            {% endfor %}
+        </p>
+    {% endif %}
+
+
+    <div class="buttons">
+        <a href="/users/{{ user.id }}" class="edit-button">Cancel</a>
+        <a href="/users/{{ user.id }}/posts/{{ post.id }}/edit" class="edit-button">Edit</a>
+        <hr>
+        <form action="/users/{{ user.id }}/posts/{{ post.id }}/delete" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
+            <input type="submit" value="Delete" class="delete-button">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Edit Post: {{ post.title }}</h1>
+
+    <form action="/users/{{ user.id }}/posts/{{ post.id }}/edit" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ post.title }}" required>
+
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="4" required>{{ post.content }}</textarea>
+
+        <label>Tags:</label>
+        {% if tags %}
+            <ul>
+                {% for tag in tags %}
+                    <li>
+                        <label for="tag_{{ tag.id }}"><input type="checkbox" id="tag_{{ tag.id }}" name="tags" value="{{ tag.id }}" {% if tag in post.tags %}checked{% endif %}> {{ tag.name }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tags found. <a href="/tags/new">Add Tag</a></p>
+        {% endif %}
+
+        <div class="buttons">
+            <input type="submit" value="Edit" class="edit-button">
+            <a href="/users/{{ user.id }}/posts/{{ post.id }}" class="edit-button">Cancel</a>
+        </div>
+    </form>
+{% endblock %}
